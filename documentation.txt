@@ -1,0 +1,208 @@
+DOCUMENTATION FOR ASSIGNMENT 1
+
+GENERAL ASSUMPTIONS (tru for all commands)
+. maximum command length is 50 characters
+
+
+
+EXTERNAL COMMANDS :
+a)ls command: 
+        1) ls             : lists all components of current directory except hidden.
+        2) ls -a          : lists all components of curr directory inlcuding hidden.
+        3) ls -1          : lists all components of curr directory in different lines. 
+
+
+corner cases and errors handled: . "knfndf" gives command not found error.
+                                 . ls -a handles hidden files as well.
+                                 . "ls -p" or "ls -d -f" gives invalid command as not present
+                                    in the options mentioned above.
+                                 . "ls dname" gives "No such file or directory" error incase 
+                                   directory doesn't exist.
+
+
+
+b)mkdir command: 
+        1) mkdir          : creates a new directory (mkdir e/b/c wont work if e not there).
+        2) mkdir -v       : aknowledges that directory is created on creating a new one. 
+        3) mkdir -p       : creates successive directories like e/b/c even if e not there.
+
+
+corner cases and errors handled: . "knfndf" gives command not found error.
+                                 . Also "mkdir" and "mkdir -v" shows "mkdir:missing operand" error
+                                  in accordance  with the unix terminal.
+                                 . Duplicate directories can't be created.
+                                 . multiple directories "mkdir a b" can be created in one go.
+
+assumptions: . at max 10 directories can be created in one command.
+
+   
+
+c)rm command 
+        1) rm             : removes any files given.
+        2) rm -d          : removes empty directories.
+        3) rm -v          : acknowledges that files have been removed after removing them.
+
+corner cases and errors handled: ."fjjf" gives invalid command.
+                                 ."rm d_name" gives "rm: cannot remove b: is a directory" error.
+                                 ."rm -d a" gives "not empty error" if a is not an empty directory.
+                                 ."rm a" gives "file does'nt exist" error if a doesn't exist.
+                                 . multiple directories can be deleted at once.
+
+
+
+d)cat command:
+        1) cat [filenames]  : concatenates the contents of files and prints on the terminal  
+        2) cat -E           : works similar to cat but adds a $ sign in beginng of each line
+        3) cat -n           : works similar to cat but prints the line no. sign in beginng of each line
+
+corner cases and errors handled: ."fjjf" gives invalid command.
+                                 ."cat d_name" gives "cat: is a directory" error.
+                                 ."cat file_name" gives "cat:: No such file or directory" error if file 
+                                   does'nt exist.
+                                 . "cat - z" gives command not found.
+                                 . multiple files can be handled in one command
+                                 . cat from terminal (breaks on typing break)
+
+
+assumptions: . at max 10 files can be opened in one command.
+             . simply typing "cat" won't work as it takes input from user infinitely and prints it 
+                until the user interrupts. (tho it does work on unix)
+
+
+
+
+e)date command
+        1) date           : prints date and time.
+        2) date -u        : prints date time according to UTC time format.
+        3) date -R        : prints info about time differnce between utc and current zone.   
+
+
+corner cases and errors handled: . "dgiggn" gives invalid command.
+                                 . "date -z" and "date -v -r" are invalid options.
+                                 . These commands would work irrespective of the region in 
+                                   which you are.
+
+
+
+INTERNAL COMMANDS:
+a)echo command
+        1) echo           : prints as a string.
+        2) echo -n        : doesn't terminate string with a newline.
+        3) echo --help    : prints help of echo.
+
+
+corner cases and errors handled: . "dgiggn" gives command not found.
+                                 . "echo -p fjj" actually prints the string instead of an error
+
+assumptions: . max lenght of the string to be printed is 50 characters long (length of command).
+
+
+
+b)pwd command
+        1) pwd            : prints current working directory 
+        2) pwd -L         : works exactly same as pwd 
+
+
+corner cases and errors handled: . "dgiggn" gives command not found.
+                                 . "pwd -a -b" or "pwd -z" are invalid options.
+
+assumptions: . max lenght of command won't be more than 50 characters.
+
+
+
+c)cd command 
+        1) cd dir_name    : changes current directory to the one mentioned
+        2) cd ~           : changes to home directory
+        3) cd -           : goes back to previous directory.
+
+
+corner cases and errors handled: . "dgiggn" gives command not found.
+                                 . too many arguments error in bash shell 
+                                   ("cd a/ b" instead of "cd a/b" gives this error).
+                                 . it gives an error if we try to open a directory which does not
+                                   exist.
+
+assumptions: . max lenght of command won't be more than 50 characters.
+
+
+
+exit command to exit the shell.
+
+
+
+TEST CASES (execute in order)
+
+ls 
+ls -a 
+ls -1
+ls kfmf
+ls -p 
+ls a
+ls -1 a
+ls a/b
+knfndf
+mkdir .hidden 
+ls 
+ls -a
+run ls -a in home/jarvis 
+
+mkdir new         , ls (show new)
+mkdir -v new2    , ls (show new2)
+mkdir f/g  (error)
+mkdir one two three
+mkdir -p f/g      , ls f(show p)
+mkdir a              (duplicate directory)
+mkdir               (less arguments)
+
+rm remove_me.txt
+rm remove_me.txt (file doesn't exist error)
+remove multiple directories at once (create 3 new and remove them)
+rm a   (cant remove a directory)
+rm -d new 
+ls 
+rm -d a (directory not empty  do ls a and show)
+rm -a -b (invalid option)
+rm -v command (create a dummy text file)
+
+cat mkdir.c
+cat mkdir 
+cd ..
+cat documentation.txt 
+cat mkdir.c ls.c (output in direct continuation)
+cat -E documentation.txt 
+cat -n documentation.txt 
+cat -z 
+cd shell
+cat a
+cat nofile 
+cat from terminal
+
+date 
+date -u 
+date -R 
+
+echo printf
+echo -n printf
+echo --help
+echo -p fjj
+
+pwd 
+pwd -L 
+cd .. 
+pwd 
+
+cd 
+ls 
+cd /
+ls
+pwd 
+cd to shell 
+cd ~
+cd -
+cd -
+cd jdfndnf
+cd a/ b (too many arguments error)
+
+exit
+
+then demonstrate for &t 
